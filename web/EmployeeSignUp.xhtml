@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"/>
+                <h:form class="form-horizontal">
+                    <fieldset class="col-md-6">
+                        <div id="legend">
+                            <legend style="text-align: center;margin-top: 50px">Kayıt Ol</legend>
+                        </div>
+                        <div class="control-group">
+                            <h:outputLabel class="control-label">Ad</h:outputLabel>
+                            <div class="controls">
+                                <h:inputText value="#{emp.ad}" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <h:outputLabel class="control-label">Soyad</h:outputLabel>
+                            <div class="controls">
+                                <h:inputText value="#{emp.soyad}" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <h:outputLabel class="control-label">Kullanıcı Adınız</h:outputLabel>
+                            <div class="controls">
+                                <h:inputText value="#{emp.kullaniciAd}" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <h:outputLabel class="control-label">E-mail Adresiniz</h:outputLabel>
+                            <div class="controls">
+                                <h:inputText value="#{emp.email}" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <h:outputLabel class="control-label">Parola</h:outputLabel>
+                            <div class="controls">
+                                <h:inputText value="#{emp.parola}" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <h:outputLabel class="control-label">Parolanızı Tekrar Giriniz</h:outputLabel>
+                            <div class="controls">
+                                <h:inputText value="#{emp.parola}" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <h:commandButton class="btn btn-success btn-lg"  style="margin-top: 20px" value="Kayıt Ol" action="#{emp.submit()}"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+</html>
+
