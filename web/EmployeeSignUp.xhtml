@@ -43,18 +43,18 @@
                         <div class="control-group">
                             <h:outputLabel class="control-label">Parola</h:outputLabel>
                             <div class="controls">
-                                <h:inputText value="#{emp.parola}" class="form-control input-lg"/>
+                                <h:inputSecret value="#{emp.parola}" class="form-control input-lg"/>
                             </div>
                         </div>
                         <div class="control-group">
                             <h:outputLabel class="control-label">Parolanızı Tekrar Giriniz</h:outputLabel>
                             <div class="controls">
-                                <h:inputText value="#{emp.parola}" class="form-control input-lg"/>
+                                <h:inputSecret value="#{emp.parola}" class="form-control input-lg"/>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="controls">
-                                <h:commandButton class="btn btn-success btn-lg"  style="margin-top: 20px" value="Kayıt Ol" action="#{emp.submit()}"/>
+                                <h:commandButton class="btn btn-success btn-lg"  style="margin-top: 20px" value="Kayıt Ol" action="#{emp.kayitEkle()}"/>
                             </div>
                         </div>
                     </fieldset>

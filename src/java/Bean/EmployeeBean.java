@@ -1,11 +1,11 @@
 package Bean;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "emp")
 @SessionScoped
@@ -57,30 +57,31 @@ public class EmployeeBean {
         this.Ad = Ad;
     }
 
-    public Integer kayitEkle() {
+    public String kayitEkle() throws ClassNotFoundException {
         int sonuc = 0;
         try {
-
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection("jdbc:sqlserver://127.0.0.1; databaseName=IsBulmaPlatformu", "sa", "Sherlock221");
-            Statement stmt = con.createStatement();
-            sonuc = stmt.executeUpdate("INSERT INTO Eleman(Ad,Soyad,KullaniciAd,Email,Parola) VALUES("+this.Ad+","+this.Soyad+","+this.KullaniciAd+","+this.Email+","+this.Parola+")");
-            stmt.close();
-            con.close();
-            System.out.println(sonuc + "Kayıt eklendi");
-        } catch (Exception e) {
-            sonuc = -1;
-            System.out.println(sonuc + "Kayıt eklenemedi");
-            System.out.println(e);
+            Connection baglanti = DriverManager.getConnection("jdbc:sqlserver://;databaseName=IsBulmaPlatformu", "sa", "Sherlock221");
+            PreparedStatement ps = null;
+            if (baglanti != null) {
+                ps = baglanti.prepareStatement("INSERT INTO Eleman(Ad,Soyad,Email,KullaniciAd,Parola) VALUES(?,?,?,?,?)");
+                ps.setString(1, Ad);
+                ps.setString(2, Soyad);
+                ps.setString(3, Email);
+                ps.setString(4, KullaniciAd);
+                ps.setString(5, Parola);
+                sonuc = ps.executeUpdate();
+                baglanti.close();
+                ps.close();
+            }
+        } catch (SQLException e) {
+            return e.toString();
         }
-        return sonuc;
-    }
-
-    public String submit() {
-        if (this.kayitEkle() > 0) {
+        if (sonuc > 0) {
             return "index";
         } else {
             return "EmployeeSignUp";
         }
+
     }
 }

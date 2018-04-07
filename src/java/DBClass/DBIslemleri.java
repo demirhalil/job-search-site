@@ -20,7 +20,7 @@ public class DBIslemleri {
     public Connection connect() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection baglanti = DriverManager.getConnection("jdbc:sqlserver://127.0.0.1; databaseName=IsBulmaPlatformu", "sa", "Sherlock221");
+            Connection baglanti = DriverManager.getConnection("jdbc:sqlserver://;databaseName=IsBulmaPlatformu","sa","Sherlock221");
             return baglanti;
         } catch (Exception e) {
             return null;
