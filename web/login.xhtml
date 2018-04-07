@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Giriş Yap</title>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body style="background-color: #eee">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"/>
+                <h:form class="form-horizontal">
+                    <fieldset class="col-md-4">
+                        <div id="legend">
+                            <legend style="text-align: center;margin-top: 50px;">Lütfen Giriş Yapın</legend>
+                        </div>
+                        <div class="control-group">
+                            <h:outputLabel class="control-label">Kullanıcı Ad</h:outputLabel>
+                            <div class="controls">
+                                <h:inputText value="#{emp.ad}" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <h:outputLabel class="control-label">Şifre</h:outputLabel>
+                            <div class="controls">
+                                <h:inputText value="" class="form-control input-lg"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <h:selectBooleanCheckbox value=""/>
+                            <h:outputLabel class="control-label" style="margin-left: 5px">Giriş Bilgilerimi Hatırla</h:outputLabel>                                                      
+                        </div>                                              
+                        <div class="control-group">
+                            <div class="controls">
+                                <h:commandButton class="btn btn-primary btn-lg col-md-12"  style="margin-top: 20px" value="Giriş" action="#{emp.kayitEkle()}"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+</html>
+
