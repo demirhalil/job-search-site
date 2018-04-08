@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class DBIslemleri {
+    
+    private Connection baglanti;
 
     private static DBIslemleri dbNesne = new DBIslemleri();
 
@@ -17,40 +19,13 @@ public class DBIslemleri {
         return dbNesne;
     }
 
-    public Connection connect() {
+    public Connection getConnection() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection baglanti = DriverManager.getConnection("jdbc:sqlserver://;databaseName=IsBulmaPlatformu","sa","Sherlock221");
-            return baglanti;
+            baglanti = DriverManager.getConnection("jdbc:sqlserver://;databaseName=IsBulmaPlatformu", "sa", "Sherlock221");
         } catch (Exception e) {
-            return null;
+            System.out.println(e);
         }
-    }
-
-    public int command(String sqlCumle) {
-        int result = 0;
-        try {
-            Connection baglanti = dbNesne.connect();
-            Statement sorgu = baglanti.createStatement();
-            result = sorgu.executeUpdate(sqlCumle);
-            sorgu.close();
-            baglanti.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            result = -1;
-        }
-        return result;
-    }
-
-    public ResultSet getResultSet(String sqlCumle) {
-        ResultSet rset = null;
-        try {
-            Connection baglanti = dbNesne.connect();
-            Statement sorgu = baglanti.createStatement();
-            rset = sorgu.executeQuery(sqlCumle);
-        } catch (Exception e) {
-            rset = null;
-        }
-        return rset;
+        return baglanti;
     }
 }

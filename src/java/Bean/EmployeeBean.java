@@ -10,13 +10,21 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "emp")
 @SessionScoped
 public class EmployeeBean {
-
+    private int Id;
     private String Ad;
     private String Soyad;
     private String KullaniciAd;
     private String Email;
     private String Parola;
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
+    
     public String getSoyad() {
         return Soyad;
     }
