@@ -1,29 +1,18 @@
-package DBClass;
+package Bean;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 
-public class DBIslemleri {
-    
-    private Connection baglanti;
+public class DbBean {
 
-    private static DBIslemleri dbNesne = new DBIslemleri();
-
-    private DBIslemleri() {
-
-    }
-
-    public static DBIslemleri getDbObject() {
-        return dbNesne;
-    }
+    Connection baglanti;
 
     public Connection getConnection() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             baglanti = DriverManager.getConnection("jdbc:sqlserver://;databaseName=IsBulmaPlatformu", "sa", "Sherlock221");
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
         }
         return baglanti;
