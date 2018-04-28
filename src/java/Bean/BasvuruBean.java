@@ -8,7 +8,7 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class BasvuruBean {
     private int ID;
-    private int ElemanId;
+    private int CalisanId;
     private int IlanId;
 
     public int getID() {
@@ -19,12 +19,12 @@ public class BasvuruBean {
         this.ID = ID;
     }
 
-    public int getElemanId() {
-        return ElemanId;
+    public int getCalisanId() {
+        return CalisanId;
     }
 
-    public void setElemanId(int ElemanId) {
-        this.ElemanId = ElemanId;
+    public void setCalisanId(int CalisanId) {
+        this.CalisanId = CalisanId;
     }
 
     public int getIlanId() {
@@ -34,4 +34,6 @@ public class BasvuruBean {
     public void setIlanId(int IlanId) {
         this.IlanId = IlanId;
     }
+
+   
 }

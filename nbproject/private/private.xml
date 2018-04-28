@@ -5,17 +5,12 @@
             <url>src/java/Bean/EmployeeBean.java</url>
             <bookmark id="1">
                 <name/>
-                <line>61</line>
+                <line>69</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/WebWorkspace/KariyerWebApp/web/firmaKayit.xhtml</file>
-            <file>file:/D:/WebWorkspace/KariyerWebApp/web/ilanYayinla.xhtml</file>
-            <file>file:/D:/WebWorkspace/KariyerWebApp/web/resources/css/corousel.css</file>
-            <file>file:/D:/WebWorkspace/KariyerWebApp/web/index.xhtml</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
