@@ -28,12 +28,16 @@
                         <li><h:link outcome="iletisim.xhtml" value="İletişim"/></li>
                         <li><h:link outcome="blog.xhtml" value="Blog"/></li>                        
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><h:link outcome="Basvurularim.xhtml"><span class="glyphicon"></span>Başvurularım</h:link></li>
-                        <li><h:link outcome="hesapAyarlarim.xhtml"><span class="glyphicon"></span>Hesap Ayarlarım</h:link></li>
-                        <li><h:link outcome="ozgecmisim.xhtml"><span class="glyphicon"></span>Özgeçmişim</h:link></li>                       
-                        <li><h:link outcome="index.xhtml"><span class="glyphicon glyphicon-log-out"></span> Çıkış Yap</h:link></li> 
-                    </ul>
+                    <h:form>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><h:link outcome="Basvurularim.xhtml"><span class="glyphicon"></span>Başvurularım</h:link></li>
+                            <li><h:link outcome="hesapAyarlarim.xhtml"><span class="glyphicon"></span>Hesap Ayarlarım</h:link></li>
+                            <li><h:link outcome="ozgecmisim.xhtml"><span class="glyphicon"></span>Özgeçmişim</h:link></li>                           
+                            <li>
+                                <h:commandLink action="#{calisan.logout()}"><span class="glyphicon glyphicon-log-out"></span> Çıkış Yap</h:commandLink>
+                            </li>
+                        </ul>
+                    </h:form>
                 </div>
             </div>
         </nav>

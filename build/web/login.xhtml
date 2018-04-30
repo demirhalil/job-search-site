@@ -53,22 +53,19 @@
                         <div class="control-group">
                             <h:outputLabel class="control-label">Kullanıcı Ad</h:outputLabel>
                             <div class="controls">
-                                <h:inputText value="#{emp.ad}" class="form-control input-lg"/>
+                                <h:inputText value="#{calisan.kullaniciAd}" class="form-control input-lg"/>
                             </div>
                         </div>
                         <div class="control-group">
                             <h:outputLabel class="control-label">Şifre</h:outputLabel>
                             <div class="controls">
-                                <h:inputText value="" class="form-control input-lg"/>
+                                <h:inputSecret value="#{calisan.parola}" class="form-control input-lg"/>
                             </div>
                         </div>
-                        <div class="control-group">
-                            <h:selectBooleanCheckbox value=""/>
-                            <h:outputLabel class="control-label" style="margin-left: 5px">Giriş Bilgilerimi Hatırla</h:outputLabel>                                                      
-                        </div>                                              
+                                                                  
                         <div class="control-group">
                             <div class="controls">
-                                <h:commandButton class="btn btn-primary btn-lg col-md-12"  style="margin-top: 20px" value="Giriş" action="#{emp.kayitEkle()}"/>
+                                <h:commandButton class="btn btn-primary btn-lg col-md-12"  style="margin-top: 20px" value="Giriş" action="#{calisan.login()}"/>
                             </div>
                         </div>
                     </fieldset>

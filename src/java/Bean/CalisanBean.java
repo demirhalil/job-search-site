@@ -1,15 +1,23 @@
-
 package Bean;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "calisan")
 @RequestScoped
-public class CalisanBean {
+public class CalisanBean implements Serializable {
+
     private int ID;
     private String Ad;
     private String Soyad;
@@ -92,9 +100,9 @@ public class CalisanBean {
     public void setSigaraIciyorMu(boolean SigaraIciyorMu) {
         this.SigaraIciyorMu = SigaraIciyorMu;
     }
-    
+
     //Üye kayıt işlemi
-    public String uyeKayit(){
+    public String uyeKayit() {
         int result = 0;
         try {
             baglanti = DbBean.getConnection();
@@ -106,13 +114,36 @@ public class CalisanBean {
             stmt.setString(5, Parola);
             result = stmt.executeUpdate();
             baglanti.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println(e);
         }
         if (result > 0) {
             return "login.xhtml?faces-redirect=true";
-        }
-        else
+        } else {
             return "EmployeeSignUp.xhtml?faces-redirect=true";
+        }
     }
+
+    //Login işlemi
+    public String login() throws SQLException {
+        boolean valid = LoginDAO.validate(KullaniciAd, Parola);
+        if (valid) {
+            HttpSession session = SessionUtils.getSession();
+            session.setAttribute("username", KullaniciAd);
+            return "Calisan";
+        } else {
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            "Incorrect Username and Passowrd",
+                            "Please enter correct username and Password"));
+            return "login";
+        }
+    }
+    public String logout() {
+        HttpSession session = SessionUtils.getSession();
+        session.invalidate();
+        return "index";
+    }
+
 }
