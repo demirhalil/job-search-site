@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class DbBean {
 
-    Connection baglanti;
+    static Connection baglanti;
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             baglanti = DriverManager.getConnection("jdbc:sqlserver://;databaseName=IsBulmaPlatformu", "sa", "Sherlock221");
