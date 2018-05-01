@@ -18,7 +18,7 @@ class LoginDAO {
 
         try {
             con = DbBean.getConnection();
-            ps = con.prepareStatement("Select KullaniciAd, Parola from Calisan where KullaniciAd = ? and Parola = ?");
+            ps = con.prepareStatement("Select Email, Sifre from Uye where Email = ? and Sifre = ?");
             ps.setString(1, user);
             ps.setString(2, password);
 

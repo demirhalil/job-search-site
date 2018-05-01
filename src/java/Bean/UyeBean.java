@@ -82,7 +82,7 @@ public class UyeBean implements Serializable {
             System.err.println(e);
         }
         if (result > 0) {
-            return "index.xhtml?faces-redirect=true";
+            return "uyeLogin.xhtml?faces-redirect=true";
         } else {
             return "uyeKayit.xhtml?faces-redirect=true";
         }
@@ -92,15 +92,15 @@ public class UyeBean implements Serializable {
         boolean valid = LoginDAO.validate(Email, Sifre);
         if (valid) {
             HttpSession session = SessionUtils.getSession();
-            session.setAttribute("username", Email);
-            return "Calisan";
+            session.setAttribute("Email", Email);
+            return "uyeIndex";
         } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                             "Incorrect Username and Passowrd",
                             "Please enter correct username and Password"));
-            return "login";
+            return "uyeLogin.xhtml";
         }
     }
 

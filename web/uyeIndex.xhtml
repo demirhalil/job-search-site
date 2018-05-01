@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Kariyerim</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>	         <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/corousel.css" rel="stylesheet" type="text/css"/>	         <link href="resources/css/corousel.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/slider.css" rel="stylesheet" type="text/css"/>	         <link href="resources/css/slider.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body style="background-color: #eeeeee">
+        <nav class="navbar navbar-fixed-top navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h:link outcome="index.xhtml" value="Kariyer Noktası" class="navbar-brand"/>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><h:link outcome="ilanlar.xhtml" value="Tüm İş İlanları"/></li>                                             
+                    </ul>
+                    <h:form>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><h:link outcome="basvurularim.xhtml"><span class="glyphicon"></span>Başvurularım</h:link></li>
+                            <li><h:link outcome="ozgecmisOlustur.xhtml" value="Özgeçmişim"/></li> 
+                            <li>
+                                <h:commandLink action="#{uye.logout()}"><span class="glyphicon glyphicon-log-out"></span> Çıkış Yap</h:commandLink>
+                            </li>
+                        </ul>
+                    </h:form>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container" >
+            <div class="row">
+                <div class="col-md-2"/>
+                <div class="col-md-8" style="background-color: white">
+                    <h:outputLabel class="h3" value="#{ilan.pozisyon}" binding="#{ilan.pozisyon}"/>
+                    <p class="h5">Soft Yazılım</p><!--Şirket adı-->
+                    <div>İstanbul</div><!--Şehir-->
+                    <p><!--Açıklama-->
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+                        posuere lectus et, fringilla augue.
+                    </p>
+                    <h:form style="float: right">
+                        <h:commandButton class="btn btn-danger" value="BAŞVUR"/>
+                    </h:form><br/><br/>
+                </div>
+            </div><br/>
+            <div class="row">
+                <div class="col-md-2"/>
+                <div class="col-md-8" style="background-color: white">
+                    <p class="h4">Yazılım Mühendisi</p><!--Aranan meslek-->
+                    <p class="h5">Soft Yazılım</p><!--Şirket adı-->
+                    <div>İstanbul</div><!--Şehir-->
+                    <p><!--Açıklama-->
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+                        posuere lectus et, fringilla augue.
+                    </p>
+                   <h:form style="float: right">
+                        <h:commandButton class="btn btn-danger" value="BAŞVUR"/>
+                    </h:form><br/><br/>
+                </div>
+            </div><br/>
+              <div class="row">
+                <div class="col-md-2"/>
+                <div class="col-md-8" style="background-color: white">
+                    <p class="h4">Yazılım Mühendisi</p><!--Aranan meslek-->
+                    <p class="h5">Soft Yazılım</p><!--Şirket adı-->
+                    <div>İstanbul</div><!--Şehir-->
+                    <p><!--Açıklama-->
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+                        posuere lectus et, fringilla augue.
+                    </p>
+                    <h:form style="float: right">
+                        <h:commandButton class="btn btn-danger" value="BAŞVUR"/>
+                    </h:form><br/><br/>
+                </div>
+            </div><br/>          
+              <div class="row">
+                <div class="col-md-2"/>
+                <div class="col-md-8" style="background-color: white">
+                    <p class="h4">Yazılım Mühendisi</p><!--Aranan meslek-->
+                    <p class="h5">Soft Yazılım</p><!--Şirket adı-->
+                    <div>İstanbul</div><!--Şehir-->
+                    <p><!--Açıklama-->
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+                        posuere lectus et, fringilla augue.
+                    </p>
+                   <h:form style="float: right">
+                        <h:commandButton class="btn btn-danger" value="BAŞVUR"/>
+                    </h:form><br/><br/>
+                </div>
+            </div><br/>          
+              <div class="row">
+                <div class="col-md-2"/>
+                <div class="col-md-8" style="background-color: white">
+                    <p class="h4">Yazılım Mühendisi</p><!--Aranan meslek-->
+                    <p class="h5">Soft Yazılım</p><!--Şirket adı-->
+                    <div>İstanbul</div><!--Şehir-->
+                    <p><!--Açıklama-->
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+                        posuere lectus et, fringilla augue.
+                    </p>
+                   <h:form style="float: right">
+                        <h:commandButton class="btn btn-danger" value="BAŞVUR"/>
+                    </h:form><br/><br/>
+                </div>
+            </div><br/>          
+              <div class="row">
+                <div class="col-md-2"/>
+                <div class="col-md-8" style="background-color: white">
+                    <p class="h4">Yazılım Mühendisi</p><!--Aranan meslek-->
+                    <p class="h5">Soft Yazılım</p><!--Şirket adı-->
+                    <div>İstanbul</div><!--Şehir-->
+                    <p><!--Açıklama-->
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+                        posuere lectus et, fringilla augue.
+                    </p>
+                    <h:form style="float: right">
+                        <h:commandButton class="btn btn-danger" value="BAŞVUR"/>
+                    </h:form><br/><br/>
+                </div>
+            </div><br/>          
+              <div class="row">
+                <div class="col-md-2"/>
+                <div class="col-md-8" style="background-color: white">
+                    <p class="h4">Yazılım Mühendisi</p><!--Aranan meslek-->
+                    <p class="h5">Soft Yazılım</p><!--Şirket adı-->
+                    <div>İstanbul</div><!--Şehir-->
+                    <p><!--Açıklama-->
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+                        posuere lectus et, fringilla augue.
+                    </p>
+                    <h:form style="float: right">
+                        <h:commandButton class="btn btn-danger" value="BAŞVUR"/>
+                    </h:form><br/><br/>
+                </div>
+            </div><br/>          
+              <div class="row">
+                <div class="col-md-2"/>
+                <div class="col-md-8" style="background-color: white">
+                    <p class="h4">Yazılım Mühendisi</p><!--Aranan meslek-->
+                    <p class="h5">Soft Yazılım</p><!--Şirket adı-->
+                    <div>İstanbul</div><!--Şehir-->
+                    <p><!--Açıklama-->
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, 
+                        posuere lectus et, fringilla augue.
+                    </p>
+                    <h:form style="float: right">
+                        <h:commandButton class="btn btn-danger" value="BAŞVUR"/>
+                    </h:form><br/><br/>
+                </div>
+            </div><br/>          
+        </div>
+    </h:body>
+</html>
+

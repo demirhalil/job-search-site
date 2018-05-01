@@ -1,6 +1,11 @@
 
 package Bean;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -9,15 +14,30 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class IlanBean {
     private int ID;
-    private String Kod;
-    private String PozisyonAd;
-    private int PersonelSayisi;
-    private Date Tarih;
-    private String Sehir;
+    private String Pozisyon;
+    private String Sektor;
+    private String Kategori;
+    private String CalismaSekli;
+    private String CalismaYeri;
+    private String Deneyim;
+    private Date IlkYayınlamaTarih;
+    private Date SonBasvuruTarih;
     private String IsTanim;
-    private String Departman;
-    private String FirmaAd;
+    private String Aciklama;
     private String ArananNitelikler;
+    private String FirmaAd;
+    ArrayList ilanListesi;
+    Connection baglanti;
+
+    public IlanBean() {
+    }
+    public String getFirmaAd() {
+        return FirmaAd;
+    }
+
+    public void setFirmaAd(String FirmaAd) {
+        this.FirmaAd = FirmaAd;
+    }
 
     public int getID() {
         return ID;
@@ -27,44 +47,68 @@ public class IlanBean {
         this.ID = ID;
     }
 
-    public String getKod() {
-        return Kod;
+    public String getPozisyon() {
+        return Pozisyon;
     }
 
-    public void setKod(String Kod) {
-        this.Kod = Kod;
+    public void setPozisyon(String Pozisyon) {
+        this.Pozisyon = Pozisyon;
     }
 
-    public String getPozisyonAd() {
-        return PozisyonAd;
+    public String getSektor() {
+        return Sektor;
     }
 
-    public void setPozisyonAd(String PozisyonAd) {
-        this.PozisyonAd = PozisyonAd;
+    public void setSektor(String Sektor) {
+        this.Sektor = Sektor;
     }
 
-    public int getPersonelSayisi() {
-        return PersonelSayisi;
+    public String getKategori() {
+        return Kategori;
     }
 
-    public void setPersonelSayisi(int PersonelSayisi) {
-        this.PersonelSayisi = PersonelSayisi;
+    public void setKategori(String Kategori) {
+        this.Kategori = Kategori;
     }
 
-    public Date getTarih() {
-        return Tarih;
+    public String getCalismaSekli() {
+        return CalismaSekli;
     }
 
-    public void setTarih(Date Tarih) {
-        this.Tarih = Tarih;
+    public void setCalismaSekli(String CalismaSekli) {
+        this.CalismaSekli = CalismaSekli;
     }
 
-    public String getSehir() {
-        return Sehir;
+    public String getCalismaYeri() {
+        return CalismaYeri;
     }
 
-    public void setSehir(String Sehir) {
-        this.Sehir = Sehir;
+    public void setCalismaYeri(String CalismaYeri) {
+        this.CalismaYeri = CalismaYeri;
+    }
+
+    public String getDeneyim() {
+        return Deneyim;
+    }
+
+    public void setDeneyim(String Deneyim) {
+        this.Deneyim = Deneyim;
+    }
+
+    public Date getIlkYayınlamaTarih() {
+        return IlkYayınlamaTarih;
+    }
+
+    public void setIlkYayınlamaTarih(Date IlkYayınlamaTarih) {
+        this.IlkYayınlamaTarih = IlkYayınlamaTarih;
+    }
+
+    public Date getSonBasvuruTarih() {
+        return SonBasvuruTarih;
+    }
+
+    public void setSonBasvuruTarih(Date SonBasvuruTarih) {
+        this.SonBasvuruTarih = SonBasvuruTarih;
     }
 
     public String getIsTanim() {
@@ -75,20 +119,12 @@ public class IlanBean {
         this.IsTanim = IsTanim;
     }
 
-    public String getDepartman() {
-        return Departman;
+    public String getAciklama() {
+        return Aciklama;
     }
 
-    public void setDepartman(String Departman) {
-        this.Departman = Departman;
-    }
-
-    public String getFirmaAd() {
-        return FirmaAd;
-    }
-
-    public void setFirmaAd(String FirmaAd) {
-        this.FirmaAd = FirmaAd;
+    public void setAciklama(String Aciklama) {
+        this.Aciklama = Aciklama;
     }
 
     public String getArananNitelikler() {
@@ -97,5 +133,5 @@ public class IlanBean {
 
     public void setArananNitelikler(String ArananNitelikler) {
         this.ArananNitelikler = ArananNitelikler;
-    }
+    }        
 }
