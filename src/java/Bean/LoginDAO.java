@@ -36,4 +36,29 @@ class LoginDAO {
         }
         return false;
     }
+    
+    public static boolean validateIsveren(String user, String password) throws SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = DbBean.getConnection();
+            ps = con.prepareStatement("Select Email, Sifre from IsVeren where Email = ? and Sifre = ?");
+            ps.setString(1, user);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                //result found, means valid inputs
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Login error -->" + ex.getMessage());
+            return false;
+        } finally {
+            con.close();
+        }
+        return false;
+    }
 }

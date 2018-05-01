@@ -3,8 +3,11 @@ package Bean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "isveren")
 @RequestScoped
@@ -126,5 +129,27 @@ public class IsverenBean {
         } else {
             return "isverenKayit.xhtml?faces-redirect=true";
         }
+    }
+    
+     public String login() throws SQLException {
+        boolean valid = LoginDAO.validateIsveren(Email, Sifre);
+        if (valid) {
+            HttpSession session = SessionUtils.getSession();
+            session.setAttribute("Email", Email);
+            return "isverenIndex";
+        } else {
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            "Incorrect Username and Passowrd",
+                            "Please enter correct username and Password"));
+            return "isverenLogin.xhtml";
+        }
+    }
+
+    public String logout() {
+        HttpSession session = SessionUtils.getSession();
+        session.invalidate();
+        return "index";
     }
 }
