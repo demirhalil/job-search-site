@@ -5,35 +5,33 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Üye Ol</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="resources/css/slider.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/customCSS.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/corousel.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body style="background-color:#f1f2f2">
-
-
-        <!--Menü-->
-        <nav class="navbar navbar-fixed-top navbar-inverse">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <h:link outcome="index.xhtml" value="Kariyer Noktası" class="navbar-brand"/>
+                    <h:link outcome="index.xhtml" value="İş Arıyorum" class="navbar-brand"/>
                 </div>
-                <div class="navbar-collapse collapse navbar-left">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><h:link outcome="ilanlar.xhtml" value="Tüm İş İlanları"/></li>
-                        <li><h:link outcome="ozgecmisOlustur.xhtml" value="Özgeçmiş Oluştur"/></li>
-                    </ul>
-                </div>
-                <div class="navbar-collapse collapse navbar-right">
-                    <ul class="nav navbar-nav">                        
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">                       
+                        <li>
+                            <h:link outcome="ilanlar.xhtml" value="İş İlanları" class="navbar-brand"/>
+                        </li>
+                        <li>
+                            <h:link outcome="iletisim.xhtml" value="İletişim" class="navbar-brand"/>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Üye<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -45,68 +43,96 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">İşveren<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><h:link outcome="isverenLogin.xhtml" value="İşveren Girişi"/></li>
-                                <li><h:link outcome="isverenKayit.xhtml" value="Kayıt Ol"/></li>
+                                <li><h:link outcome="isverenKayit.xhtml" value="İşveren Kayıt Ol"/></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
+                <!-- /.navbar-collapse -->
             </div>
-        </nav><br/><br/>
-        <!--Menü -->
+            <!-- /.container -->
+        </nav>
+        <br/><br/>
 
-        <!--Üye Kayıt Formu -->
-        <div class="container">           
+        <div class="container">
             <div class="row">
-                <div class="col-md-8"  style="background-color: #ffffff">
-                    <h:form class="form-horizontal">
-                        <fieldset><br/>
-                            <div class="col-md-12">
-                                <div id="legend">
-                                    <legend style="text-align: center;margin-top: 50px">Üye Ol</legend>
+                <div class="col-md-1"/>
+                <div class="col-md-8">
+                    <div id="wrapper" class="col-md-12">
+                        <div id="page-wrapper">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h3 class="page-header text-center">Üye Kayıt Ekranı</h3>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="control-group col-md-12">
-                                        <h:outputLabel class="control-label">Ad</h:outputLabel>
-                                        <div class="controls">
-                                            <h:inputText value="#{uye.ad}" class="form-control input-lg"/>
+                            <h:form>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                Aşağıdaki Bilgileri Lütfen Doldurun
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <h:form>
+                                                            <div class="form-group">
+                                                                <h:outputLabel>Adınız</h:outputLabel>
+                                                                <h:inputText class="form-control" value="#{uye.ad}" a:placeholder="Ahmet">
+                                                                </h:inputText>
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <h:outputLabel>Soyadınız</h:outputLabel>
+                                                                <h:inputText class="form-control" value="#{uye.soyad}" a:placeholder="Kamar"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <h:outputLabel>E-mail</h:outputLabel>
+                                                                <h:inputText class="form-control" value="#{uye.email}" a:placeholder="email@example.com"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <h:outputLabel>Şifre</h:outputLabel>
+                                                                <h:inputSecret class="form-control" value="#{uye.sifre}"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <h:outputLabel>Doğum Tarihi</h:outputLabel>
+                                                                <h:inputSecret class="form-control" value="#{uye.dogumTarih}" a:placeholder="gg.aa.YYYY"/>
+                                                                <p class="help-block">Doğum tarihini belirtilen formatta giriniz.</p>
+                                                            </div>
+                                                            <div class="form-group">  
+                                                                <h:outputLabel  class="control-label col-sm-4" style="margin-left: -15px">Cinsiyetiniz</h:outputLabel>  
+                                                                <div class="col-sm-6">  
+                                                                    <h:selectOneRadio value="#{uye.cinsiyet}" validatorMessage="Cinsiyet alanı zorunludur.">  
+                                                                        <f:selectItem itemValue="E" itemLabel="Erkek" />
+                                                                        <f:selectItem itemValue="K" itemLabel="Kadın" />
+                                                                        <f:validateRequired/>  
+                                                                    </h:selectOneRadio>  
+                                                                </div>  
+                                                            </div>  
+                                                            <div class="form-group">
+                                                                <h:commandButton class="btn btn-success btn-block" value="Üye Ol" action="#{uye.uyeKayit()}"/>
+                                                            </div>
+                                                        </h:form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="control-group col-md-12">
-                                        <h:outputLabel class="control-label">Soyad</h:outputLabel>
-                                        <div class="controls">
-                                            <h:inputText value="#{uye.soyad}" class="form-control input-lg"/>
-                                        </div>
-                                    </div>
-                                    <div class="control-group col-md-12">
-                                        <h:outputLabel class="control-label">Email</h:outputLabel>
-                                        <div class="controls">
-                                            <h:inputText value="#{uye.email}" class="form-control input-lg"/>
-                                        </div>
-                                    </div>
-                                    <div class="control-group col-md-12">
-                                        <h:outputLabel class="control-label">Şifre</h:outputLabel>
-                                        <div class="controls">
-                                            <h:inputSecret value="#{uye.sifre}" class="form-control input-lg"/>
-                                        </div>
-                                    </div>
-                                    <div class="control-group col-md-12">
-                                        <div class="controls ">
-                                            <h:commandButton class="btn btn-success btn-lg  col-md-12"  style="margin-top: 20px" value="Üye Ol" action="#{uye.uyeKayit()}"/>
-                                        </div>
-                                    </div>
+                                    </div>                              
                                 </div>
-                            </div><br/><br/><br/><br/>
-                        </fieldset>
-                    </h:form>
-                </div>
-                <div class="col-md-1"></div>
-                <div class="col-md-3">
-                    <img class="img" src="resources/images/uyeKayitYanResim.png" alt="üyeKayıtResmi"/>
-                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>           
             </div>
-        </div>       
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright &copy; Your Website 2014</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </h:body>

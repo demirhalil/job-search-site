@@ -7,15 +7,56 @@
         <title>İşveren Giriş</title>
         <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/corousel.css" rel="stylesheet" type="text/css"/>
-        <link href="resources/css/slider.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/customCSS.css" rel="stylesheet" type="text/css"/>
     </h:head>
-    <h:body>
-       <div class="container">
+    <h:body style="background-color: #eee">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h:link outcome="index.xhtml" value="İş Arıyorum" class="navbar-brand"/>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">                       
+                        <li>
+                            <h:link outcome="ilanlar.xhtml" value="İş İlanları" class="navbar-brand"/>
+                        </li>
+                        <li>
+                            <h:link outcome="iletisim.xhtml" value="İletişim" class="navbar-brand"/>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Üye<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><h:link outcome="uyeLogin.xhtml" value="Üye Girişi"/></li>
+                                <li><h:link outcome="uyeKayit.xhtml" value="Üye Ol"/></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">İşveren<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><h:link outcome="isverenLogin.xhtml" value="İşveren Girişi"/></li>
+                                <li><h:link outcome="isverenKayit.xhtml" value="İşveren Kayıt Ol"/></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+        <br/><br/><br/>
+        <div class="container">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-panel panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">İşveren Giriş Ekranı</h3>
+                            <h3 class="panel-title text-center">İşveren Giriş Ekranı</h3>
                         </div>
                         <div class="panel-body">
                             <h:form role="form">
@@ -36,6 +77,8 @@
                 </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </h:body>
 </html>
 

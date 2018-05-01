@@ -1,13 +1,8 @@
 package Bean;
-
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -24,8 +19,26 @@ public class UyeBean implements Serializable {
     private String Soyad;
     private String Email;
     private String Sifre;
+    private String DogumTarih;
+    private String Cinsiyet;
     Connection baglanti;
     private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+    public String getDogumTarih() {
+        return DogumTarih;
+    }
+
+    public void setDogumTarih(String DogumTarih) {
+        this.DogumTarih = DogumTarih;
+    }
+
+    public String getCinsiyet() {
+        return Cinsiyet;
+    }
+
+    public void setCinsiyet(String Cinsiyet) {
+        this.Cinsiyet = Cinsiyet;
+    }
 
     public int getID() {
         return ID;
@@ -71,11 +84,13 @@ public class UyeBean implements Serializable {
         int result = 0;
         try {
             baglanti = DbBean.getConnection();
-            PreparedStatement stmt = baglanti.prepareStatement("INSERT INTO Uye (Ad,Soyad,Email,Sifre) VALUES(?,?,?,?)");
+            PreparedStatement stmt = baglanti.prepareStatement("INSERT INTO Uye (Ad,Soyad,Email,Sifre,DogumTarih,Cinsiyet) VALUES(?,?,?,?,?,?)");
             stmt.setString(1, Ad);
             stmt.setString(2, Soyad);
             stmt.setString(3, Email);
             stmt.setString(4, Sifre);
+            stmt.setString(5, DogumTarih);
+            stmt.setString(6, Cinsiyet);
             result = stmt.executeUpdate();
             baglanti.close();
         } catch (SQLException e) {
@@ -87,6 +102,7 @@ public class UyeBean implements Serializable {
             return "uyeKayit.xhtml?faces-redirect=true";
         }
     }
+
     //Login işlemi
     public String login() throws SQLException {
         boolean valid = LoginDAO.validate(Email, Sifre);

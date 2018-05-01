@@ -3,10 +3,136 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>İletişim</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/customCSS.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/corousel.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/iletisim.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>  
     </h:head>
-    <h:body>
-        Hello from Facelets
+    <h:body style="background-color:#f1f2f2">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h:link outcome="index.xhtml" value="İş Arıyorum" class="navbar-brand"/>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">                       
+                        <li>
+                            <h:link outcome="ilanlar.xhtml" value="İş İlanları" class="navbar-brand"/>
+                        </li>
+                        <li>
+                            <h:link outcome="iletisim.xhtml" value="İletişim" class="navbar-brand"/>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Üye<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><h:link outcome="uyeLogin.xhtml" value="Üye Girişi"/></li>
+                                <li><h:link outcome="uyeKayit.xhtml" value="Üye Ol"/></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">İşveren<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><h:link outcome="isverenLogin.xhtml" value="İşveren Girişi"/></li>
+                                <li><h:link outcome="isverenKayit.xhtml" value="İşveren Kayıt Ol"/></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+        </nav>
+
+        <div class="container">
+            <!-- Page Heading/Breadcrumbs -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">İletişim
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="index.xhtml">Anasayfa</a>
+                        </li>
+                        <li class="active">İletişim</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <iframe width="100%" height="400px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=tr&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe>
+            </div>
+            <div class="col-md-4">
+                <h3>İletişim Bilgileri</h3>
+                <p>
+                    3481 Kadıköy<br/>İstanbul, Türkiye<br/>
+                </p>
+                <p>Telefon: (123) 456-7890</p>
+                <p>E-mail: kariyernoktasi@gmail.com
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>Bize mesaj gönderin</h3>
+                    <h:form>
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label>Ad</label>
+                                <h:inputText class="form-control" value="#{mesaj.ad}"/>
+                                    <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label>Soyad</label>
+                                <h:inputText class="form-control" value="#{mesaj.soyad}"/>
+                                    <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label>Telefon</label>
+                                <h:inputText class="form-control" value="#{mesaj.telefon}"/>
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label>E-mail</label>
+                                <h:inputText class="form-control" value="#{mesaj.email}"/>
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <div class="controls">
+                                <label>Mesajınız</label>
+                                <h:inputTextarea rows="10" cols="100" class="form-control" style="resize:none" value="#{mesaj.mesaj}"/>
+                            </div>
+                        </div>
+                        <div id="success"></div>
+                        <!-- For success/fail messages -->
+                        <h:commandButton class="btn btn-primary" value="Gönder" action="#{mesaj.mesajGonder()}"/>
+                    </h:form>
+                </div>
+
+            </div>
+            <!-- /.row -->
+            <hr/>
+                <!-- Footer -->
+                <footer>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>Copyright &copy; Your Website 2014</p>
+                        </div>
+                    </div>
+                </footer>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </h:body>
 </html>
 
