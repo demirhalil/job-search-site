@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Facelet Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/slider.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/corousel.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body style="background-color:#f1f2f2">
+        <!--Menü-->
+        <nav class="navbar navbar-fixed-top navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h:link outcome="index.xhtml" value="Kariyer Noktası" class="navbar-brand"/>
+                </div>
+                <div class="navbar-collapse collapse navbar-left">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><h:link outcome="ilanlar.xhtml" value="Tüm İş İlanları"/></li>
+                        <li><h:link outcome="ozgecmisOlustur.xhtml" value="Özgeçmiş Oluştur"/></li>
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse navbar-right">
+                    <ul class="nav navbar-nav">                        
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Üye<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><h:link outcome="uyeLogin.xhtml" value="Üye Girişi"/></li>
+                                <li><h:link outcome="uyeKayit.xhtml" value="Üye Ol"/></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">İşveren<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><h:link outcome="isverenLogin.xhtml" value="İşveren Girişi"/></li>
+                                <li><h:link outcome="isverenKayit.xhtml" value="Kayıt Ol"/></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--Menü -->
+
+        <!--Üye Kayıt Formu -->
+        <div class="container">           
+            <div class="row">
+                <div class="col-md-8"  style="background-color: #ffffff">
+                    <h:form class="form-horizontal">
+                        <fieldset><br/>
+                            <div class="col-md-12">
+                                <div id="legend">
+                                    <legend style="text-align: center;margin-top: 50px">Üye Ol</legend>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="control-group col-md-12">
+                                        <h:outputLabel class="control-label">Ad</h:outputLabel>
+                                        <div class="controls">
+                                            <h:inputText value="#{uye.ad}" class="form-control input-lg"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group col-md-12">
+                                        <h:outputLabel class="control-label">Soyad</h:outputLabel>
+                                        <div class="controls">
+                                            <h:inputText value="#{uye.soyad}" class="form-control input-lg"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group col-md-12">
+                                        <h:outputLabel class="control-label">Email</h:outputLabel>
+                                        <div class="controls">
+                                            <h:inputText value="#{uye.email}" class="form-control input-lg"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group col-md-12">
+                                        <h:outputLabel class="control-label">Şifre</h:outputLabel>
+                                        <div class="controls">
+                                            <h:inputSecret value="#{uye.sifre}" class="form-control input-lg"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group col-md-12">
+                                        <div class="controls ">
+                                            <h:commandButton class="btn btn-success btn-lg  col-md-12"  style="margin-top: 20px" value="Üye Ol" action="#{uye.uyeKayit()}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><br/><br/><br/><br/>
+                        </fieldset>
+                    </h:form>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <img class="img" src="resources/images/uyeKayitYanResim.png" alt="üyeKayıtResmi"/>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </h:body>
+</html>
+

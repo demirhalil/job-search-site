@@ -13,21 +13,19 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
-@ManagedBean(name = "calisan")
+@ManagedBean(name = "uye")
 @RequestScoped
-public class CalisanBean implements Serializable {
+public class UyeBean implements Serializable {
 
     private int ID;
     private String Ad;
     private String Soyad;
     private String Email;
-    private String KullaniciAd;
-    private String Parola;
-    private Date DogumTarih;
-    private boolean AskerlikDurum;
-    private boolean SigaraIciyorMu;
+    private String Sifre;
     Connection baglanti;
+    private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
     public int getID() {
         return ID;
@@ -61,75 +59,40 @@ public class CalisanBean implements Serializable {
         this.Email = Email;
     }
 
-    public String getKullaniciAd() {
-        return KullaniciAd;
+    public String getSifre() {
+        return Sifre;
     }
 
-    public void setKullaniciAd(String KullaniciAd) {
-        this.KullaniciAd = KullaniciAd;
+    public void setSifre(String Sifre) {
+        this.Sifre = Sifre;
     }
-
-    public String getParola() {
-        return Parola;
-    }
-
-    public void setParola(String Parola) {
-        this.Parola = Parola;
-    }
-
-    public Date getDogumTarih() {
-        return DogumTarih;
-    }
-
-    public void setDogumTarih(Date DogumTarih) {
-        this.DogumTarih = DogumTarih;
-    }
-
-    public boolean isAskerlikDurum() {
-        return AskerlikDurum;
-    }
-
-    public void setAskerlikDurum(boolean AskerlikDurum) {
-        this.AskerlikDurum = AskerlikDurum;
-    }
-
-    public boolean isSigaraIciyorMu() {
-        return SigaraIciyorMu;
-    }
-
-    public void setSigaraIciyorMu(boolean SigaraIciyorMu) {
-        this.SigaraIciyorMu = SigaraIciyorMu;
-    }
-
     //Üye kayıt işlemi
     public String uyeKayit() {
         int result = 0;
         try {
             baglanti = DbBean.getConnection();
-            PreparedStatement stmt = baglanti.prepareStatement("INSERT INTO Calisan(Ad,Soyad,KullaniciAd,Email,Parola) VALUES(?,?,?,?,?)");
+            PreparedStatement stmt = baglanti.prepareStatement("INSERT INTO Uye (Ad,Soyad,Email,Sifre) VALUES(?,?,?,?)");
             stmt.setString(1, Ad);
             stmt.setString(2, Soyad);
-            stmt.setString(3, KullaniciAd);
-            stmt.setString(4, Email);
-            stmt.setString(5, Parola);
+            stmt.setString(3, Email);
+            stmt.setString(4, Sifre);
             result = stmt.executeUpdate();
             baglanti.close();
         } catch (SQLException e) {
             System.err.println(e);
         }
         if (result > 0) {
-            return "login.xhtml?faces-redirect=true";
+            return "index.xhtml?faces-redirect=true";
         } else {
-            return "EmployeeSignUp.xhtml?faces-redirect=true";
+            return "uyeKayit.xhtml?faces-redirect=true";
         }
     }
-
     //Login işlemi
     public String login() throws SQLException {
-        boolean valid = LoginDAO.validate(KullaniciAd, Parola);
+        boolean valid = LoginDAO.validate(Email, Sifre);
         if (valid) {
             HttpSession session = SessionUtils.getSession();
-            session.setAttribute("username", KullaniciAd);
+            session.setAttribute("username", Email);
             return "Calisan";
         } else {
             FacesContext.getCurrentInstance().addMessage(
@@ -140,6 +103,7 @@ public class CalisanBean implements Serializable {
             return "login";
         }
     }
+
     public String logout() {
         HttpSession session = SessionUtils.getSession();
         session.invalidate();
