@@ -144,7 +144,7 @@ public class UyeBean implements Serializable {
 
     /*
     ***Bir metodun başına get koyduğumuz zaman JSF bunu nesne olarak algılar. Propertilerdeki mantık gibi.
-    ***XHTML tarafında metodu çağırarak DataTable ı doldururuz.
+    ***XHTML tarafında metodu çağırarak DataTable ı doldururuz.*/
     public List<UyeBean> getTablodakiKayitlar(){
         baglanti = DbBean.getConnection();
         PreparedStatement preparedStatement = null;
@@ -164,12 +164,12 @@ public class UyeBean implements Serializable {
         }
         return sorguSonucu;
     }
-     */
+     
     
     /*
     ***PostConstruct ile yaparak sayfa yüklendiği zaman verileri getirmiş oluruz.
     ***Burada daha önce tanımladığımız listeye verileri atar XHTML tarafındada datatable a listeyi döndürürüz.
-    */
+    
     public UyeBean(){
         
     }
@@ -193,4 +193,5 @@ public class UyeBean implements Serializable {
             System.err.println("Hata meydana geldi" + e);
         }
     }
+*/
 }
