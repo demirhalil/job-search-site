@@ -163,7 +163,7 @@ public class UyeBean implements Serializable {
                 ilan.setFirmaAd(rs.getString("FirmaAd"));
                 ilan.setCalismaYeri(rs.getString("CalismaYeri"));
                 ilan.setKategori(rs.getString("Kategori"));
-                ilan.setSonBasvuruTarih(rs.getDate("SonBasvuruTarih"));
+                ilan.setSonBasvuruTarih(rs.getString("SonBasvuruTarih"));
                 ilan.setCalismaSekli(rs.getString("CalismaSekli"));
                 ilanList.add(ilan);
             }
@@ -175,7 +175,7 @@ public class UyeBean implements Serializable {
         }
         return ilanList;
     }
-
+    
     public String detay(int id) throws SQLException {
         PreparedStatement ps = null;
         IlanBean ilan = null;
@@ -194,8 +194,8 @@ public class UyeBean implements Serializable {
             ilan.setCalismaSekli(rs.getString("CalismaSekli"));
             ilan.setCalismaYeri(rs.getString("CalismaYeri"));
             ilan.setDeneyim(rs.getString("Deneyim"));
-            ilan.setIlkYayınlamaTarih(rs.getDate("IlkYayinlamaTarih"));
-            ilan.setSonBasvuruTarih(rs.getDate("SonBasvuruTarih"));
+            ilan.setIlkYayınlamaTarih(rs.getString("IlkYayinlamaTarih"));
+            ilan.setSonBasvuruTarih(rs.getString("SonBasvuruTarih"));
             ilan.setIsTanim(rs.getString("IsTanimi"));
             ilan.setAciklama(rs.getString("Aciklama"));
             ilan.setArananNitelikler(rs.getString("ArananNitelikler"));
@@ -207,7 +207,6 @@ public class UyeBean implements Serializable {
             baglanti.close();
         }
         return "/ilanDetay.xhtml?faces-redirect=true";
-    }
-
-   
+    }     
+    
 }

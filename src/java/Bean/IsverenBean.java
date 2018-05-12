@@ -2,9 +2,13 @@ package Bean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -23,7 +27,7 @@ public class IsverenBean {
     private String FirmaTel;
     private String PersonelSayisi;
     private String WebAdresi;
-    Connection baglanti ;
+    Connection baglanti;
 
     public int getID() {
         return ID;
@@ -130,8 +134,8 @@ public class IsverenBean {
             return "isverenKayit.xhtml?faces-redirect=true";
         }
     }
-    
-     public String login() throws SQLException {
+
+    public String login() throws SQLException {
         boolean valid = LoginDAO.validateIsveren(Email, Sifre);
         if (valid) {
             HttpSession session = SessionUtils.getSession();
@@ -152,4 +156,47 @@ public class IsverenBean {
         session.invalidate();
         return "index";
     }
+
+    List<IlanBean> ilanList;
+
+    public List<IlanBean> getIlanlist() {
+        return ilanList;
+    }
+
+    public void setIlanlist(List<IlanBean> ilanlist) {
+        this.ilanList = ilanlist;
+    }
+
+    public List<IlanBean> getIlanlar() throws SQLException {
+        baglanti = DbBean.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ilanList = new ArrayList<>();
+        try {
+            ps = baglanti.prepareStatement("SELECT ID,Pozisyon,Sektor,FirmaAd,CalismaYeri,Kategori,SonBasvuruTarih,CalismaSekli FROM Ilan");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                IlanBean ilan = new IlanBean();
+                ilan.setID(rs.getInt("ID"));
+                ilan.setPozisyon(rs.getString("Pozisyon"));
+                ilan.setSektor(rs.getString("Sektor"));
+                ilan.setFirmaAd(rs.getString("FirmaAd"));
+                ilan.setCalismaYeri(rs.getString("CalismaYeri"));
+                ilan.setKategori(rs.getString("Kategori"));
+                ilan.setSonBasvuruTarih(rs.getString("SonBasvuruTarih"));
+                ilan.setCalismaSekli(rs.getString("CalismaSekli"));
+                ilanList.add(ilan);
+            }
+        } catch (SQLException e) {
+            System.err.println("Hata meydana geldi" + e);
+        } finally {
+            ps.close();
+            baglanti.close();
+        }
+        return ilanList;
+    }
+
+   
+
+   
 }
