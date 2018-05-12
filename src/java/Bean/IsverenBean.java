@@ -1,5 +1,6 @@
 package Bean;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "isveren")
 @RequestScoped
-public class IsverenBean {
+public class IsverenBean implements Serializable{
 
     private int ID;
     private String FirmaYetkiliAd;

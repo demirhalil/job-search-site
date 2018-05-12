@@ -1,5 +1,6 @@
 package Bean;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +13,7 @@ import javax.faces.bean.RequestScoped;
 
 @ManagedBean(name = "ilan")
 @RequestScoped
-public class IlanBean {
+public class IlanBean implements Serializable{
 
     private int ID;
     private String Pozisyon;

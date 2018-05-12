@@ -1,6 +1,7 @@
 
 package Bean;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -10,7 +11,7 @@ import javax.faces.bean.RequestScoped;
 
 @ManagedBean(name = "basvuru")
 @RequestScoped
-public class BasvuruBean {
+public class BasvuruBean implements Serializable{
     private int ID;
     private int IlanId;
     private int CalisanId;

@@ -52,7 +52,7 @@
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
                             <li>
-                                <h:link outcome="isverenIndex.xhtml" value="İlanlar"/>                            
+                                <h:link outcome="isverenIndex.xhtml?faces-redirect=true" value="İlanlar"/>                            
                             </li>
                         </ul>
                     </div>
@@ -95,7 +95,7 @@
                                 </h:column>
                                 <h:column>  
                                     <f:facet name="header">Yeni Kayıt</f:facet>                                    
-                                    <h:commandButton action = "ilanEkle.xhtml" value="Yeni Kayıt" class="btn btn-info btn-block">  
+                                    <h:commandButton action = "ilanEkle.xhtml?faces-redirect=true" value="Yeni Kayıt" class="btn btn-info btn-block">  
                                     </h:commandButton>  
                                 </h:column>  
                                 <h:column>  

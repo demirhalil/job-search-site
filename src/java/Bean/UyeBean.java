@@ -16,9 +16,14 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import Bean.IlanBean;
 import java.sql.Statement;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean(name = "uye")
 @RequestScoped
+@ViewScoped
+@SessionScoped
 public class UyeBean implements Serializable {
 
     private int ID;
@@ -175,7 +180,7 @@ public class UyeBean implements Serializable {
         }
         return ilanList;
     }
-    
+
     public String detay(int id) throws SQLException {
         PreparedStatement ps = null;
         IlanBean ilan = null;
@@ -207,6 +212,6 @@ public class UyeBean implements Serializable {
             baglanti.close();
         }
         return "/ilanDetay.xhtml?faces-redirect=true";
-    }     
-    
+    }
+
 }
