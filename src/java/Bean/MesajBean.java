@@ -22,6 +22,10 @@ public class MesajBean {
     private String Email;
     private String Mesaj;
     Connection baglanti;
+    
+    public MesajBean(){
+        
+    }
 
     public int getID() {
         return ID;

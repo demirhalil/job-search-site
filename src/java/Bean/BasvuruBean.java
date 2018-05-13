@@ -17,6 +17,10 @@ public class BasvuruBean implements Serializable{
     private int CalisanId;
     Connection baglanti;
 
+    public BasvuruBean(){
+        
+    }
+    
     public int getID() {
         return ID;
     }

@@ -36,6 +36,10 @@ public class UyeBean implements Serializable {
     Connection baglanti;
     List<IlanBean> ilanList;
     private final Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+    
+    public UyeBean(){
+        
+    }
 
     public List<IlanBean> getIlanList() {
         return ilanList;

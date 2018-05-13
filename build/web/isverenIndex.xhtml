@@ -10,6 +10,19 @@
         <link href="resources/css/metisMenu.min.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <script>
+            function silmeOnayla() {
+                var karar = confirm("Bu kaydı silmek istediğinizden emin misiniz?");
+                if (karar) {
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+
+
+        </script>
         <style type="text/css">  
             table {  
                 border-collapse: collapse;  
@@ -85,7 +98,7 @@
                                     <f:facet name="header">Çalışma Yeri</f:facet>  
                                     <h:outputText value="#{i.calismaYeri}"/>  
                                 </h:column>
-                                 <h:column>  
+                                <h:column>  
                                     <f:facet name="header">Çalışma Şekli</f:facet>  
                                     <h:outputText value="#{i.calismaSekli}"/>  
                                 </h:column>
@@ -97,10 +110,15 @@
                                     <f:facet name="header">Yeni Kayıt</f:facet>                                    
                                     <h:commandButton action = "ilanEkle.xhtml?faces-redirect=true" value="Yeni Kayıt" class="btn btn-info btn-block">  
                                     </h:commandButton>  
+                                </h:column>
+                                 <h:column>  
+                                    <f:facet name="header">Güncelle</f:facet>                                    
+                                    <h:commandButton action = "#{isveren.ilanEdit(i.ID)}" value="Güncelle" class="btn btn-primary btn-block">  
+                                    </h:commandButton>  
                                 </h:column>  
                                 <h:column>  
                                     <f:facet name="header">Sil</f:facet>                                    
-                                    <h:commandButton action = "#{ilan.ilanSil(i.ID)}" value="Sil" class="btn btn-danger btn-block">  
+                                    <h:commandButton action = "#{ilan.ilanSil(i.ID)}" value="Sil" class="btn btn-danger btn-block" onclick="return silmeOnayla()">  
                                     </h:commandButton>  
                                 </h:column>  
                             </h:dataTable>  

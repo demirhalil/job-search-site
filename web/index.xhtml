@@ -1,13 +1,30 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>           
         <title>Kariyer Noktası</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/corousel.css" rel="stylesheet" type="text/css"/>
         <link href="resources/css/customCSS.css" rel="stylesheet" type="text/css"/>
+        <style type="text/css">  
+            table {  
+                border-collapse: collapse;  
+                width: 100%;  
+            }  
+            th, td {  
+                text-align: left;  
+                padding: 8px;  
+            }  
+
+            tr:nth-child(even){background-color: #f2f2f2}  
+            th {  
+                background-color: #4CAF50;  
+                color: white;  
+            }  
+        </style>  
     </h:head>
     <h:body style="background-color:#f1f2f2">       
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -19,28 +36,31 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <h:link outcome="index.xhtml" value="İş Arıyorum" class="navbar-brand"/>
+                    <h:link outcome="index.xhtml?faces-redirect=true" value="İş Arıyorum" class="navbar-brand"/>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">                       
                         <li>
-                            <h:link outcome="ilanlar.xhtml" value="İş İlanları" class="navbar-brand"/>
+                            <h:link outcome="index.xhtml?faces-redirect=true" value="Anasayfa" class="navbar-brand"/>
                         </li>
                         <li>
-                            <h:link outcome="iletisim.xhtml" value="İletişim" class="navbar-brand"/>
+                            <h:link outcome="blog.xhtml?faces-redirect=true" value="Blog" class="navbar-brand"/>
+                        </li>
+                        <li>
+                            <h:link outcome="iletisim.xhtml?faces-redirect=true" value="İletişim" class="navbar-brand"/>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Üye<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><h:link outcome="uyeLogin.xhtml" value="Üye Girişi"/></li>
-                                <li><h:link outcome="uyeKayit.xhtml" value="Üye Ol"/></li>
+                                <li><h:link outcome="uyeLogin.xhtml?faces-redirect=true" value="Üye Girişi"/></li>
+                                <li><h:link outcome="uyeKayit.xhtml?faces-redirect=true" value="Üye Ol"/></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">İşveren<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><h:link outcome="isverenLogin.xhtml" value="İşveren Girişi"/></li>
-                                <li><h:link outcome="isverenKayit.xhtml" value="İşveren Kayıt Ol"/></li>
+                                <li><h:link outcome="isverenLogin.xhtml?faces-redirect=true" value="İşveren Girişi"/></li>
+                                <li><h:link outcome="isverenKayit.xhtml?faces-redirect=true" value="İşveren Kayıt Ol"/></li>
                             </ul>
                         </li>
                     </ul>
@@ -48,83 +68,71 @@
             </div>
         </nav>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12"><br/><br/>
-                    <ol class="breadcrumb">
-                        <li><a href="index.html">Anasayfa</a>
-                        </li>
-                        <li class="active">Blog</li>
-                    </ol>
+            <div class="row"><br/><br/>
+                <div class="col-lg-8">
+                    <h:form>  
+                        <h:dataTable value="#{uye.ilanlar}" var="i"   
+                                     class="table table-striped table-hover table-bordered table-condensed">  
+                            <h:column>  
+                                <f:facet name="header">Pozisyon Ad</f:facet>  
+                                <h:outputText value="#{i.pozisyon}"/>  
+                            </h:column>  
+                            <h:column>  
+                                <f:facet name="header">Sektör</f:facet>  
+                                <h:outputText value="#{i.sektor}"/>  
+                            </h:column>
+                            <h:column>  
+                                <f:facet name="header">Kategori</f:facet>  
+                                <h:outputText value="#{i.kategori}"/>  
+                            </h:column>  
+                            <h:column>  
+                                <f:facet name="header">Firma Ad</f:facet>  
+                                <h:outputText value="#{i.firmaAd}"/>  
+                            </h:column>  
+                            <h:column>  
+                                <f:facet name="header">Çalışma Yeri</f:facet>  
+                                <h:outputText value="#{i.calismaYeri}"/>  
+                            </h:column>                                  
+                            <h:column>  
+                                <f:facet name="header">Başvur</f:facet>                                    
+                                <h:commandButton action = "#{ilan.detay(i.ID)}" value="Başvur" class="btn btn-danger btn-block">
+                                </h:commandButton>  
+                            </h:column>                               
+                        </h:dataTable>  
+                    </h:form>  
                 </div>
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-md-1 text-center">
-                    <p><i class="fa fa-camera fa-4x"></i>
-                    </p>
-                    <p>Haziran 17, 2014</p>
-                </div>
-                <div class="col-md-5">
-                    <a href="kariyerGunleri.xhtml">
-                        <img class="img-responsive img-hover" src="resources/images/kariyer-gunleri-afis.jpg" style="width: 500px;height: 230px" alt="kariyer günleri"/>
+                <div class="col-lg-4">                   
+                    <a href="kariyerGunleri.xhtml??faces-redirect=true">
+                        <div class="row">
+                            <div>
+                                <div class="well">
+                                    <h4>KARİYER GÜNLERİ</h4>
+                                    <p>Kocaeli Üniversitesi İşletme Kulübü tarafından bu yıl “12. Kariyer Günleri” düzenleniyor. Etkinlik 27 – 28 Şubat 2018 tarihlerinde Prof. Dr. Baki Komsuoğlu Kültür ve Kongre Merkezi’nde gerçekleştirilecek</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a><br/>
+                    <a href="kariyerGunleri.xhtml??faces-redirect=true">
+                        <div class="row">
+                            <div>
+                                <div class="well">
+                                    <h4>KARİYER MERKEZİ</h4>
+                                    <p>Kocaeli Üniversitesi İşletme Kulübü tarafından bu yıl “12. Kariyer Günleri” düzenleniyor. Etkinlik 27 – 28 Şubat 2018 tarihlerinde Prof. Dr. Baki Komsuoğlu Kültür ve Kongre Merkezi’nde gerçekleştirilecek</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="kariyerGunleri.xhtml??faces-redirect=true">
+                        <div class="row">
+                            <div>
+                                <div class="well">
+                                    <h4>KARİYER RİSKLERİ</h4>
+                                    <p>Kocaeli Üniversitesi İşletme Kulübü tarafından bu yıl “12. Kariyer Günleri” düzenleniyor. Etkinlik 27 – 28 Şubat 2018 tarihlerinde Prof. Dr. Baki Komsuoğlu Kültür ve Kongre Merkezi’nde gerçekleştirilecek</p>
+                                </div>
+                            </div>
+                        </div>
                     </a>
                 </div>
-                <div class="col-md-6">
-                    <h3>
-                        <a href="blog-post.html">Kariyer Günleri</a>
-                    </h3>
-                    <p>Yazar : <a href="#">Ömer Ali Özbek</a>
-                    </p>
-                    <p>İstanbul Bilgi Üniversitesi Kariyer Merkezi tarafından düzenlenen Kariyer Günleri'nde bu yıl da her programdan öğrencinin mesleki becerilerini geliştirmek, kendi alanı ile ilgili kurumlarla tanışmak ve ilham almak için fırsat bulabileceği bir program hazırlandı.Bölüm ve sınıf ayrımı olmadan tüm lisans-önlisans, lisansüstü öğrencileri ve BİLGİ mezunları katılabilir. </p>
-                    <a class="btn btn-primary" href="kariyerGunleri.xhtml">Read More <i class="fa fa-angle-right"></i></a>
-                </div>
-                <hr/>
-
-            </div>
-            <hr/>  
-            <div class="row">
-                <div class="col-md-1 text-center">
-                    <p><i class="fa fa-camera fa-4x"></i>
-                    </p>
-                    <p>Aralık 1, 2018</p>
-                </div>
-                <div class="col-md-5">
-                    <a href="kariyerGunleri.xhtml">
-                        <img class="img-responsive img-hover" src="resources/images/kariyerMerkezi.png" style="width: 500px;height: 230px" alt="kariyer günleri"/>
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <h3>
-                        <a href="blog-post.html">Kariyer Merkezi</a>
-                    </h3>
-                    <p>Yazar : <a href="#">Fatih Cambek</a>
-                    </p>
-                    <p>İstanbul Bilgi Üniversitesi Kariyer Merkezi tarafından düzenlenen Kariyer Günleri'nde bu yıl da her programdan öğrencinin mesleki becerilerini geliştirmek, kendi alanı ile ilgili kurumlarla tanışmak ve ilham almak için fırsat bulabileceği bir program hazırlandı.Bölüm ve sınıf ayrımı olmadan tüm lisans-önlisans, lisansüstü öğrencileri ve BİLGİ mezunları katılabilir. </p>
-                    <a class="btn btn-primary" href="kariyerGunleri.xhtml">Read More <i class="fa fa-angle-right"></i></a>
-                </div>
-                <hr/>
-            </div><hr/>
-            <div class="row">
-                <div class="col-md-1 text-center">
-                    <p><i class="fa fa-camera fa-4x"></i>
-                    </p>
-                    <p>Ocak 18, 2015</p>
-                </div>
-                <div class="col-md-5">
-                    <a href="kariyerGunleri.xhtml">
-                        <img class="img-responsive img-hover" src="resources/images/kariyerhedefi.jpg" style="width: 500px;height: 230px" alt="kariyer günleri"/>
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <h3>
-                        <a href="blog-post.html">Kariyer Riskleri</a>
-                    </h3>
-                    <p>Yazar : <a href="#">Halil Demir</a>
-                    </p>
-                    <p>İstanbul Bilgi Üniversitesi Kariyer Merkezi tarafından düzenlenen Kariyer Günleri'nde bu yıl da her programdan öğrencinin mesleki becerilerini geliştirmek, kendi alanı ile ilgili kurumlarla tanışmak ve ilham almak için fırsat bulabileceği bir program hazırlandı.Bölüm ve sınıf ayrımı olmadan tüm lisans-önlisans, lisansüstü öğrencileri ve BİLGİ mezunları katılabilir. </p>
-                    <a class="btn btn-primary" href="kariyerGunleri.xhtml">Read More <i class="fa fa-angle-right"></i></a>
-                </div>
-                <hr/>
             </div>
             <footer>
                 <div class="row">

@@ -21,29 +21,31 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <h:link outcome="index.xhtml" value="İş Arıyorum" class="navbar-brand"/>
+                    <h:link outcome="index.xhtml?faces-redirect=true" value="İş Arıyorum" class="navbar-brand"/>
                 </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">                       
                         <li>
-                            <h:link outcome="ilanlar.xhtml" value="İş İlanları" class="navbar-brand"/>
+                            <h:link outcome="index.xhtml?faces-redirect=true" value="Anasayfa" class="navbar-brand"/>
+                        </li>
+                         <li>
+                            <h:link outcome="blog.xhtml?faces-redirect=true" value="Blog" class="navbar-brand"/>
                         </li>
                         <li>
-                            <h:link outcome="iletisim.xhtml" value="İletişim" class="navbar-brand"/>
+                            <h:link outcome="iletisim.xhtml?faces-redirect=true" value="İletişim" class="navbar-brand"/>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Üye<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><h:link outcome="uyeLogin.xhtml" value="Üye Girişi"/></li>
-                                <li><h:link outcome="uyeKayit.xhtml" value="Üye Ol"/></li>
+                                <li><h:link outcome="uyeLogin.xhtml?faces-redirect=true" value="Üye Girişi"/></li>
+                                <li><h:link outcome="uyeKayit.xhtml?faces-redirect=true" value="Üye Ol"/></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">İşveren<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><h:link outcome="isverenLogin.xhtml" value="İşveren Girişi"/></li>
-                                <li><h:link outcome="isverenKayit.xhtml" value="İşveren Kayıt Ol"/></li>
+                                <li><h:link outcome="isverenLogin.xhtml?faces-redirect=true" value="İşveren Girişi"/></li>
+                                <li><h:link outcome="isverenKayit.xhtml?faces-redirect=true" value="İşveren Kayıt Ol"/></li>
                             </ul>
                         </li>
                     </ul>
@@ -59,7 +61,7 @@
                     <h1 class="page-header">İletişim
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="index.xhtml">Anasayfa</a>
+                        <li><a href="index.xhtml?faces-redirect=true">Anasayfa</a>
                         </li>
                         <li class="active">İletişim</li>
                     </ol>

@@ -8,8 +8,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "ilan")
 @RequestScoped
@@ -28,8 +31,17 @@ public class IlanBean implements Serializable{
     private String Aciklama;
     private String ArananNitelikler;
     private String FirmaAd;
-    ArrayList ilanListesi;
+    private int IsverenId;
+
+    public int getIsverenId() {
+        return IsverenId;
+    }
+
+    public void setIsverenId(int IsverenId) {
+        this.IsverenId = IsverenId;
+    }
     Connection baglanti;
+    private final Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
     public IlanBean() {
     }
@@ -175,5 +187,38 @@ public class IlanBean implements Serializable{
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+    
+     public String detay(int id) throws SQLException {
+        PreparedStatement ps = null;
+        IlanBean ilan = null;
+        Statement stmt = null;
+        try {
+            baglanti = DbBean.getConnection();
+            stmt = baglanti.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT *FROM Ilan WHERE ID = " + (id));
+            rs.next();
+            ilan = new IlanBean();
+            ilan.setID(rs.getInt("ID"));
+            ilan.setPozisyon(rs.getString("Pozisyon"));
+            ilan.setSektor(rs.getString("Sektor"));
+            ilan.setKategori(rs.getString("Kategori"));
+            ilan.setFirmaAd(rs.getString("FirmaAd"));
+            ilan.setCalismaSekli(rs.getString("CalismaSekli"));
+            ilan.setCalismaYeri(rs.getString("CalismaYeri"));
+            ilan.setDeneyim(rs.getString("Deneyim"));
+            ilan.setIlkYayınlamaTarih(rs.getString("IlkYayinlamaTarih"));
+            ilan.setSonBasvuruTarih(rs.getString("SonBasvuruTarih"));
+            ilan.setIsTanim(rs.getString("IsTanimi"));
+            ilan.setAciklama(rs.getString("Aciklama"));
+            ilan.setArananNitelikler(rs.getString("ArananNitelikler"));
+            sessionMap.put("i", ilan);
+        } catch (SQLException e) {
+            System.err.println("Hata meydana geldi" + e);
+        } finally {
+            stmt.close();
+            baglanti.close();
+        }
+        return "/ilanBilgiler.xhtml?faces-redirect=true";
     }
 }

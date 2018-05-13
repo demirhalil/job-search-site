@@ -5,8 +5,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -29,6 +31,11 @@ public class IsverenBean implements Serializable{
     private String PersonelSayisi;
     private String WebAdresi;
     Connection baglanti;
+     private final Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+    
+    public IsverenBean(){
+    
+    }
 
     public int getID() {
         return ID;
@@ -197,7 +204,60 @@ public class IsverenBean implements Serializable{
         return ilanList;
     }
 
-   
+    public String ilanEdit(int id) throws SQLException{
+        IlanBean ilan = null;
+        Statement stmt = null;
+        try {
+            baglanti = DbBean.getConnection();
+            stmt = baglanti.createStatement();
+            ResultSet  rs = stmt.executeQuery("SELECT *FROM Ilan WHERE ID = " +id);
+            rs.next();
+            ilan = new IlanBean();
+            ilan.setID(rs.getInt("ID"));
+            ilan.setPozisyon(rs.getString("Pozisyon"));
+            ilan.setSektor(rs.getString("Sektor"));
+            ilan.setKategori(rs.getString("Kategori"));
+            ilan.setCalismaSekli(rs.getString("CalismaSekli"));
+            ilan.setCalismaYeri(rs.getString("CalismaYeri"));
+            ilan.setDeneyim(rs.getString("Deneyim"));
+            ilan.setIlkYayınlamaTarih(rs.getString("IlkYayinlamaTarih"));
+            ilan.setSonBasvuruTarih(rs.getString("SonBasvuruTarih"));
+            ilan.setIsTanim(rs.getString("IsTanimi"));
+            ilan.setArananNitelikler(rs.getString("ArananNitelikler"));
+            ilan.setFirmaAd(rs.getString("FirmaAd"));
+            sessionMap.put("editIlan", ilan); 
+        } catch (SQLException e) {
+             System.err.println("Hata meydana geldi" + e);
+        }finally{
+            stmt.close();
+            baglanti.close();
+        }
+        return "/editIlan.xhtml?faces-redirect=true"; 
+    }
+    
+    public String guncelle(IlanBean item){
+        try {
+            baglanti = DbBean.getConnection();
+            PreparedStatement ps = baglanti.prepareStatement("Update Ilan set Pozisyon = ?,Sektor = ?,Kategori = ?,CalismaSekli = ?,CalismaYeri = ?,Deneyim = ?,IlkYayinlamaTarih = ?,SonBasvuruTarih = ?,IsTanimi = ?,ArananNitelikler = ?,FirmaAd = ?,IsverenId = ?  where ID = ?");
 
-   
+            ps.setString(1, item.getPozisyon());
+            ps.setString(2, item.getSektor());
+            ps.setString(3, item.getKategori());
+            ps.setString(4, item.getCalismaSekli());
+            ps.setString(5, item.getCalismaYeri());
+            ps.setString(6, item.getDeneyim());
+            ps.setString(7, item.getIlkYayınlamaTarih());
+            ps.setString(8, item.getSonBasvuruTarih());
+            ps.setString(9, item.getIsTanim());
+            ps.setString(10, item.getArananNitelikler());
+            ps.setString(11, item.getFirmaAd());
+            ps.setInt(12, item.getIsverenId());
+            ps.setInt(13, item.getID());
+            ps.executeUpdate();           
+            baglanti.close();
+        } catch (SQLException e) {
+            System.err.println("Hata meydana geldi" + e);
+        }
+        return "/isverenIndex.xhtml?faces-redirect=true";    
+    }
 }

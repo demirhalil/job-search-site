@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>İlan ...</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/metisMenu.min.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/sb-admin-2.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <style type="text/css">  
+            table {  
+                border-collapse: collapse;  
+                width: 100%;  
+            }  
+            th, td {  
+                text-align: left;  
+                padding: 8px;  
+            }  
+
+            tr:nth-child(even){background-color: #f2f2f2}  
+            th {  
+                background-color: #4CAF50;  
+                color: white;  
+            }  
+        </style>  
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h:link outcome="index.xhtml?faces-redirect=true" value="İş Arıyorum" class="navbar-brand"/>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">                       
+                        <li>
+                            <h:link outcome="index.xhtml?faces-redirect=true" value="Anasayfa" class="navbar-brand"/>
+                        </li>
+                        <li>
+                            <h:link outcome="blog.xhtml?faces-redirect=true" value="Blog" class="navbar-brand"/>
+                        </li>
+                        <li>
+                            <h:link outcome="iletisim.xhtml?faces-redirect=true" value="İletişim" class="navbar-brand"/>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Üye<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><h:link outcome="uyeLogin.xhtml?faces-redirect=true" value="Üye Girişi"/></li>
+                                <li><h:link outcome="uyeKayit.xhtml?faces-redirect=true" value="Üye Ol"/></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">İşveren<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><h:link outcome="isverenLogin.xhtml?faces-redirect=true" value="İşveren Girişi"/></li>
+                                <li><h:link outcome="isverenKayit.xhtml?faces-redirect=true" value="İşveren Kayıt Ol"/></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav><br/><br/><br/>
+        <div class="container">     
+            <div class="row">
+                <div class="col-lg-1"/>
+                <div class="col-lg-10">
+                    <h:form>
+                        <br/><br/>
+                        <div class="row">
+                            <h:outputText value="#{i.pozisyon}" class="h2"/>
+                        </div><hr class="hr"/>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <h:outputLabel value="İş Tanımı :"/>&nbsp;
+                                <h:outputText value="#{i.isTanim}"/>  
+                            </div><br/>
+                            <div class="row">
+                                <h:outputLabel value="Aranan Nitelikler :"/>&nbsp;
+                                <h:outputText value="#{i.arananNitelikler}"/>  
+                            </div><br/>                                                             
+                        </div>
+                        <div class="col-md-1"/>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <h:outputLabel value="Sektör :"/>&nbsp;
+                                <h:outputText value="#{i.sektor}"/>    
+                            </div><br/>
+                            <div class="row">
+                                <h:outputLabel value="Kategori :"/>&nbsp;
+                                <h:outputText value="#{i.kategori}"/>    
+                            </div><br/>
+                            <div class="row">
+                                <h:outputLabel value="Firma Adı :"/>&nbsp;
+                                <h:outputText value="#{i.firmaAd}"/>    
+                            </div><br/>
+                            <div class="row">
+                                <h:outputLabel value="Çalışma Şekli :"/>&nbsp;
+                                <h:outputText value="#{i.calismaSekli}"/>    
+                            </div><br/>
+                            <div class="row">
+                                <h:outputLabel value="Çalışma Yeri :"/>&nbsp;
+                                <h:outputText value="#{i.calismaYeri}"/>    
+                            </div><br/>
+                            <div class="row">
+                                <h:outputLabel value="Deneyim :"/>&nbsp;
+                                <h:outputText value="#{i.deneyim}"/>    
+                            </div><br/>
+                            <div class="row">
+                                <h:outputLabel value="İlk Yayınlanma Tarihi :"/>&nbsp;
+                                <h:outputText value="#{i.ilkYayınlamaTarih}"/>    
+                            </div><br/>
+                            <div class="row">
+                                <h:outputLabel value="İlan Kapanış Tarihi :"/>&nbsp;
+                                <h:outputText value="#{i.sonBasvuruTarih}"/>    
+                            </div><br/>
+                            <div class="row">
+                                <div>
+                                    <h:commandButton class="btn btn-danger btn-block btn-lg" value="Başvur" action="uyeLogin.xhtml?faces-redirect=true"/>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>  
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <hr/>
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright &copy; Your Website 2014</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script src="resources/js/sb-admin-2.js" type="text/javascript"></script>
+        <script src="resources/js/metisMenu.min.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    </h:body>
+</html>
+
