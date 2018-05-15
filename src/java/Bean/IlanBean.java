@@ -11,12 +11,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "ilan")
 @RequestScoped
-public class IlanBean implements Serializable{
+public class IlanBean implements Serializable {
 
     private int ID;
     private String Pozisyon;
@@ -28,7 +29,6 @@ public class IlanBean implements Serializable{
     private String IlkYayınlamaTarih;
     private String SonBasvuruTarih;
     private String IsTanim;
-    private String Aciklama;
     private String ArananNitelikler;
     private String FirmaAd;
     private int IsverenId;
@@ -134,13 +134,6 @@ public class IlanBean implements Serializable{
         this.IsTanim = IsTanim;
     }
 
-    public String getAciklama() {
-        return Aciklama;
-    }
-
-    public void setAciklama(String Aciklama) {
-        this.Aciklama = Aciklama;
-    }
 
     public String getArananNitelikler() {
         return ArananNitelikler;
@@ -150,23 +143,35 @@ public class IlanBean implements Serializable{
         this.ArananNitelikler = ArananNitelikler;
     }
 
+    @ManagedProperty(value = "#{IsverenBean}")
+    private IsverenBean isverenBean;
+
+    public IsverenBean getIsverenBean() {
+        return isverenBean;
+    }
+
+    public void setIsverenBean(IsverenBean isverenBean) {
+        this.isverenBean = isverenBean;
+    }
+
     public String ilanKayit() {
         int result = 0;
+        int id = IsverenBean.isverenId;
         try {
             baglanti = DbBean.getConnection();
-            PreparedStatement stmt = baglanti.prepareStatement("INSERT INTO Ilan (Pozisyon,Sektor,Kategori,FirmaAd,CalismaSekli,CalismaYeri,Deneyim,IlkYayinlamaTarih,SonBasvuruTarih,IsTanimi,Aciklama,ArananNitelikler) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement stmt = baglanti.prepareStatement("INSERT INTO Ilan (Pozisyon,Sektor,Kategori,FirmaAd,CalismaSekli,CalismaYeri,Deneyim,IlkYayinlamaTarih,SonBasvuruTarih,IsTanimi,ArananNitelikler,IsverenId) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
             stmt.setString(1, Pozisyon);
             stmt.setString(2, Sektor);
             stmt.setString(3, Kategori);
             stmt.setString(4, FirmaAd);
-            stmt.setString(5, FirmaAd);
-            stmt.setString(6, CalismaSekli);
-            stmt.setString(7, CalismaYeri);
-            stmt.setString(8, Deneyim);
-            stmt.setString(9, IlkYayınlamaTarih);
+            stmt.setString(5, CalismaSekli);
+            stmt.setString(6, CalismaYeri);
+            stmt.setString(7, Deneyim);
+            stmt.setString(8, IlkYayınlamaTarih);
+            stmt.setString(9, SonBasvuruTarih);
             stmt.setString(10, IsTanim);
             stmt.setString(11, ArananNitelikler);
-            stmt.setString(12, Aciklama);
+            stmt.setInt(12, IsverenId);
             result = stmt.executeUpdate();
             baglanti.close();
         } catch (SQLException e) {
@@ -188,8 +193,8 @@ public class IlanBean implements Serializable{
             System.out.println(e);
         }
     }
-    
-     public String detay(int id) throws SQLException {
+
+    public String detay(int id) throws SQLException {
         PreparedStatement ps = null;
         IlanBean ilan = null;
         Statement stmt = null;
@@ -210,7 +215,6 @@ public class IlanBean implements Serializable{
             ilan.setIlkYayınlamaTarih(rs.getString("IlkYayinlamaTarih"));
             ilan.setSonBasvuruTarih(rs.getString("SonBasvuruTarih"));
             ilan.setIsTanim(rs.getString("IsTanimi"));
-            ilan.setAciklama(rs.getString("Aciklama"));
             ilan.setArananNitelikler(rs.getString("ArananNitelikler"));
             sessionMap.put("i", ilan);
         } catch (SQLException e) {

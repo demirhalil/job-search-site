@@ -41,7 +41,6 @@
                     </button>
                     <h:outputText value="Kariyerim" class="navbar-brand"/>  
                 </div>
-
                 <ul class="nav navbar-top-links navbar-right" style="margin-right: 20px">                                                             
                     <li><h:link outcome="uyeKayit.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-log-out"/>Çıkış Yap</h:link></li> 
                 </ul>                             
@@ -67,11 +66,7 @@
                                 <div class="row">
                                     <h:outputLabel value="İş Tanımı :"/>&nbsp;
                                     <h:outputText value="#{i.isTanim}"/>  
-                                </div><br/>
-                                <div class="row">
-                                    <h:outputLabel value="Açıklama :"/>&nbsp;
-                                        <h:outputText value="#{i.aciklama}"/>   
-                                </div><br/>
+                                </div><br/>                               
                                 <div class="row">
                                     <h:outputLabel value="Aranan Nitelikler :"/>&nbsp;
                                         <h:outputText value="#{i.arananNitelikler}"/>  
@@ -113,7 +108,7 @@
                                 </div><br/>
                                 <div class="row">
                                     <div>
-                                        <h:commandButton class="btn btn-danger btn-block btn-lg" value="Başvur" action="#{basvuru.basvur()}"/>
+                                        <h:commandButton class="btn btn-danger btn-block btn-lg" value="Başvur" action="#{uye.basvur(i.ID)}"/>
                                     </div>
                                 </div>
                             </div>
@@ -122,10 +117,8 @@
                 </div>
             </div>
         </div>
-
         <div class="container">
             <hr/>
-            <!-- Footer -->
             <footer>
                 <div class="row">
                     <div class="col-lg-12">
@@ -138,7 +131,6 @@
         <script src="resources/js/metisMenu.min.js" type="text/javascript"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
     </h:body>
 </html>
 

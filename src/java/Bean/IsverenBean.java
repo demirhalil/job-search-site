@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "isveren")
 @RequestScoped
-public class IsverenBean implements Serializable{
+public class IsverenBean implements Serializable {
 
     private int ID;
     private String FirmaYetkiliAd;
@@ -31,10 +31,21 @@ public class IsverenBean implements Serializable{
     private String PersonelSayisi;
     private String WebAdresi;
     Connection baglanti;
-     private final Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-    
-    public IsverenBean(){
-    
+    public static int isverenId;
+    List<IsverenBean> ilanofIsveren;
+
+    public List<IsverenBean> getIlanofIsveren() {
+        return ilanofIsveren;
+    }
+
+    public void setIlanofIsveren(List<IsverenBean> ilanofIsveren) {
+        this.ilanofIsveren = ilanofIsveren;
+    }
+
+    private final Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+    public IsverenBean() {
+
     }
 
     public int getID() {
@@ -148,6 +159,7 @@ public class IsverenBean implements Serializable{
         if (valid) {
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("Email", Email);
+            isverenId = this.getIsverenId();
             return "isverenIndex";
         } else {
             FacesContext.getCurrentInstance().addMessage(
@@ -180,8 +192,9 @@ public class IsverenBean implements Serializable{
         PreparedStatement ps = null;
         ResultSet rs = null;
         ilanList = new ArrayList<>();
+        int id = isverenId;
         try {
-            ps = baglanti.prepareStatement("SELECT ID,Pozisyon,Sektor,FirmaAd,CalismaYeri,Kategori,SonBasvuruTarih,CalismaSekli FROM Ilan");
+            ps = baglanti.prepareStatement("SELECT ID,Pozisyon,Sektor,FirmaAd,CalismaYeri,Kategori,SonBasvuruTarih,CalismaSekli FROM Ilan WHERE IsverenId = '"+id+"'");
             rs = ps.executeQuery();
             while (rs.next()) {
                 IlanBean ilan = new IlanBean();
@@ -204,13 +217,13 @@ public class IsverenBean implements Serializable{
         return ilanList;
     }
 
-    public String ilanEdit(int id) throws SQLException{
+    public String ilanEdit(int id) throws SQLException {
         IlanBean ilan = null;
         Statement stmt = null;
         try {
             baglanti = DbBean.getConnection();
             stmt = baglanti.createStatement();
-            ResultSet  rs = stmt.executeQuery("SELECT *FROM Ilan WHERE ID = " +id);
+            ResultSet rs = stmt.executeQuery("SELECT *FROM Ilan WHERE ID = " + id);
             rs.next();
             ilan = new IlanBean();
             ilan.setID(rs.getInt("ID"));
@@ -225,17 +238,17 @@ public class IsverenBean implements Serializable{
             ilan.setIsTanim(rs.getString("IsTanimi"));
             ilan.setArananNitelikler(rs.getString("ArananNitelikler"));
             ilan.setFirmaAd(rs.getString("FirmaAd"));
-            sessionMap.put("editIlan", ilan); 
+            sessionMap.put("editIlan", ilan);
         } catch (SQLException e) {
-             System.err.println("Hata meydana geldi" + e);
-        }finally{
+            System.err.println("Hata meydana geldi" + e);
+        } finally {
             stmt.close();
             baglanti.close();
         }
-        return "/editIlan.xhtml?faces-redirect=true"; 
+        return "/editIlan.xhtml?faces-redirect=true";
     }
-    
-    public String guncelle(IlanBean item){
+
+    public String guncelle(IlanBean item) {
         try {
             baglanti = DbBean.getConnection();
             PreparedStatement ps = baglanti.prepareStatement("Update Ilan set Pozisyon = ?,Sektor = ?,Kategori = ?,CalismaSekli = ?,CalismaYeri = ?,Deneyim = ?,IlkYayinlamaTarih = ?,SonBasvuruTarih = ?,IsTanimi = ?,ArananNitelikler = ?,FirmaAd = ?,IsverenId = ?  where ID = ?");
@@ -251,13 +264,55 @@ public class IsverenBean implements Serializable{
             ps.setString(9, item.getIsTanim());
             ps.setString(10, item.getArananNitelikler());
             ps.setString(11, item.getFirmaAd());
-            ps.setInt(12, item.getIsverenId());
+            ps.setInt(12, isverenId);
             ps.setInt(13, item.getID());
-            ps.executeUpdate();           
+            ps.executeUpdate();
             baglanti.close();
         } catch (SQLException e) {
             System.err.println("Hata meydana geldi" + e);
         }
-        return "/isverenIndex.xhtml?faces-redirect=true";    
+        return "/isverenIndex.xhtml?faces-redirect=true";
     }
+
+    public int getIsverenId() {
+        IsverenBean isveren = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int id = 0;
+        try {
+            baglanti = DbBean.getConnection();
+            ps = baglanti.prepareStatement("SELECT *FROM IsVeren WHERE Email = '" + Email + "' and Sifre = '" + Sifre + "'");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("ID");
+            }
+        } catch (SQLException e) {
+            System.err.println("Hata meydana geldi" + e);
+        }
+        return id;
+    }
+    
+    public String kullanici() throws SQLException {
+        PreparedStatement ps = null;
+        IsverenBean isveren = null;
+        Statement stmt = null;
+        try {
+            baglanti = DbBean.getConnection();
+            stmt = baglanti.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT *FROM IsVeren WHERE ID = '"+isverenId+"'");
+            rs.next();
+            isveren = new IsverenBean();
+            isveren.setFirmaYetkiliAd(rs.getString("FirmaYetkiliAd"));
+            isveren.setSoyad(rs.getString("Soyad"));
+            isveren.setFirmaAd(rs.getString("FirmaAd"));
+            sessionMap.put("isv", isveren);
+        } catch (SQLException e) {
+            System.err.println("Hata meydana geldi" + e);
+        } finally {
+            stmt.close();
+            baglanti.close();
+        }
+        return "Hoşgeldiniz " + isveren.FirmaYetkiliAd +" "+ isveren.Soyad + "("+isveren.FirmaAd+")";
+    }
+
 }

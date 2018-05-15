@@ -35,10 +35,20 @@ public class UyeBean implements Serializable {
     private String Cinsiyet;
     Connection baglanti;
     List<IlanBean> ilanList;
+    List<IlanBean> ilanListofUser;
     private final Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-    
-    public UyeBean(){
-        
+    private static int userId;
+
+    public List<IlanBean> getIlanListofUser() {
+        return ilanListofUser;
+    }
+
+    public void setIlanListofUser(List<IlanBean> ilanListofUser) {
+        this.ilanListofUser = ilanListofUser;
+    }
+
+    public UyeBean() {
+
     }
 
     public List<IlanBean> getIlanList() {
@@ -128,6 +138,44 @@ public class UyeBean implements Serializable {
             return "uyeKayit.xhtml?faces-redirect=true";
         }
     }
+    @ManagedProperty(value = "#{BasvuruBean}")
+    private BasvuruBean basvuruBean;
+
+    public BasvuruBean getBasvuruBean() {
+        return basvuruBean;
+    }
+
+    public void setBasvuruBean(BasvuruBean basvuruBean) {
+        this.basvuruBean = basvuruBean;
+    }
+
+    public String basvur(int id) {
+        int idofUser = this.userId;
+        int result = 0;
+        try {
+            baglanti = DbBean.getConnection();
+            PreparedStatement stmt = baglanti.prepareStatement("INSERT INTO Basvuru (IlanId,CalisanId) VALUES('" + id + "','" + idofUser + "')");
+            result = stmt.executeUpdate();
+            baglanti.close();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        if (result > 0) {
+            return "uyeIndex.xhtml?faces-redirect=true";
+        } else {
+            return "ilanDetay.xhtml?faces-redirect=true";
+        }
+    }
+
+    public void basvuruSil(int id) {
+        try {
+            baglanti = DbBean.getConnection();
+            PreparedStatement stmt = baglanti.prepareStatement("delete from Basvuru where IlanId = '" + id + "' and CalisanId = '" + userId + "' ");
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
     //Login işlemi
     public String login() throws SQLException {
@@ -135,6 +183,7 @@ public class UyeBean implements Serializable {
         if (valid) {
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("Email", Email);
+            userId = this.getUserId();
             return "/uyeIndex.xhtml?faces-redirect=true";
         } else {
             FacesContext.getCurrentInstance().addMessage(
@@ -146,6 +195,25 @@ public class UyeBean implements Serializable {
         }
     }
 
+    //Giriş yapan kullanıcının ID sini tutar.
+    public int getUserId() {
+        UyeBean uye = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int id = 0;
+        try {
+            baglanti = DbBean.getConnection();
+            ps = baglanti.prepareStatement("SELECT *FROM Uye WHERE Email = '" + Email + "' and Sifre = '" + Sifre + "'");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("ID");
+            }
+        } catch (SQLException e) {
+            System.err.println("Hata meydana geldi" + e);
+        }
+        return id;
+    }
+
     //Logout işlemi
     public String logout() {
         HttpSession session = SessionUtils.getSession();
@@ -153,9 +221,36 @@ public class UyeBean implements Serializable {
         return "/index.xhtml?faces-redirect=true";
     }
 
-    /*
-    ***Bir metodun başına get koyduğumuz zaman JSF bunu nesne olarak algılar. Propertilerdeki mantık gibi.
-    ***XHTML tarafında metodu çağırarak DataTable ı doldururuz.*/
+    public List<IlanBean> getIlanofUser() throws SQLException {
+        baglanti = DbBean.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int id = this.userId;
+        ilanListofUser = new ArrayList<>();
+        try {
+            ps = baglanti.prepareStatement("select * from Ilan i inner join Basvuru b on b.IlanId = i.ID where b.CalisanId = '" + id + "'");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                IlanBean ilan = new IlanBean();
+                ilan.setID(rs.getInt("ID"));
+                ilan.setPozisyon(rs.getString("Pozisyon"));
+                ilan.setSektor(rs.getString("Sektor"));
+                ilan.setKategori(rs.getString("Kategori"));
+                ilan.setFirmaAd(rs.getString("FirmaAd"));
+                ilan.setCalismaSekli(rs.getString("CalismaSekli"));
+                ilan.setCalismaYeri(rs.getString("CalismaYeri"));
+                ilan.setDeneyim(rs.getString("Deneyim"));
+                ilanListofUser.add(ilan);
+            }
+        } catch (SQLException e) {
+            System.err.println("Hata meydana geldi" + e);
+        } finally {
+            ps.close();
+            baglanti.close();
+        }
+        return ilanListofUser;
+    }
+
     public List<IlanBean> getIlanlar() throws SQLException {
         baglanti = DbBean.getConnection();
         PreparedStatement ps = null;
@@ -206,7 +301,6 @@ public class UyeBean implements Serializable {
             ilan.setIlkYayınlamaTarih(rs.getString("IlkYayinlamaTarih"));
             ilan.setSonBasvuruTarih(rs.getString("SonBasvuruTarih"));
             ilan.setIsTanim(rs.getString("IsTanimi"));
-            ilan.setAciklama(rs.getString("Aciklama"));
             ilan.setArananNitelikler(rs.getString("ArananNitelikler"));
             sessionMap.put("i", ilan);
         } catch (SQLException e) {
@@ -218,4 +312,25 @@ public class UyeBean implements Serializable {
         return "/ilanDetay.xhtml?faces-redirect=true";
     }
 
+    public String kullanici() throws SQLException {
+        PreparedStatement ps = null;
+        UyeBean uye = null;
+        Statement stmt = null;
+        try {
+            baglanti = DbBean.getConnection();
+            stmt = baglanti.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT *FROM Uye WHERE ID = '"+userId+"'");
+            rs.next();
+            uye = new UyeBean();
+            uye.setAd(rs.getString("Ad"));
+            uye.setSoyad(rs.getString("Soyad"));
+            sessionMap.put("u", uye);
+        } catch (SQLException e) {
+            System.err.println("Hata meydana geldi" + e);
+        } finally {
+            stmt.close();
+            baglanti.close();
+        }
+        return "Hoşgeldiniz " + uye.Ad +" "+ uye.Soyad;
+    }
 }
